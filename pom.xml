@@ -61,7 +61,44 @@
 		    <version>1.4.200</version>
 		    <scope>test</scope>
 		</dependency>
-		
+
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <version>2.22.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jxr-plugin</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <developers>
@@ -117,6 +154,7 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
@@ -225,7 +263,7 @@
                     <execution>
                         <id>attach-javadocs</id>
                         <configuration>
-                            <additionalparam>${javadoc.opts}</additionalparam>
+                            <additionalJOption>${javadoc.opts}</additionalJOption>
                             <doclint>none</doclint>
                         </configuration>
                         <goals>
@@ -233,8 +271,12 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.7.1</version>
                 <executions>
@@ -267,6 +309,7 @@
                             <exclude>net/sf/jsqlparser/JSQLParserException.class</exclude>
                         </excludes>
                     </instrumentation>
+                    <check/>
                 </configuration>
             </plugin>
             <plugin>
@@ -301,6 +344,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
+                    <skip>true</skip>
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                     <maxmemory>800m</maxmemory>
                     <doclint>none</doclint>
@@ -323,6 +367,7 @@
                 <configuration>
                     <aggregate>true</aggregate>
                     <outputDirectory>%{project.reporting.outputDirectory}/cobertura</outputDirectory>
+                    <check/>
                 </configuration>
             </plugin>
             <plugin>
@@ -402,6 +447,7 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <skip>true</skip>
                             <logViolationsToConsole>true</logViolationsToConsole>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
                             <sourceDirectories>${project.build.sourceDirectory}</sourceDirectories>
